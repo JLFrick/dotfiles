@@ -54,6 +54,9 @@ autoload -Uz compinit && compinit
 # ── Aliases ──────────────────────────────────────────────────────────────────
 [ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
 
+# ── Keychain helpers (macOS) ─────────────────────────────────────────────────
+[ -f "$HOME/.keychain.zsh" ] && source "$HOME/.keychain.zsh"
+
 # ── Machine-specific overrides ───────────────────────────────────────────────
 # ~/.zshrc.local is sourced here but NEVER committed to git.
 # Use it for: work env vars, VPN aliases, machine-specific API key paths,

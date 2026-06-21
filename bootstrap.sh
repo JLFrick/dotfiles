@@ -157,10 +157,11 @@ fi
 # 6. Shell config
 # =============================================================================
 step "Shell"
-symlink "shell/.brew_env" ".brew_env"
-symlink "shell/.zshrc"    ".zshrc"
-symlink "shell/.zprofile" ".zprofile"
-symlink "shell/.aliases"  ".aliases"
+symlink "shell/.brew_env"     ".brew_env"
+symlink "shell/.zshrc"        ".zshrc"
+symlink "shell/.zprofile"     ".zprofile"
+symlink "shell/.aliases"      ".aliases"
+symlink "shell/keychain.zsh"  ".keychain.zsh"
 
 # =============================================================================
 # 7. Git
