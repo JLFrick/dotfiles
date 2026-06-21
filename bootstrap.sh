@@ -3,7 +3,7 @@
 # bootstrap.sh — dotfiles installer
 #
 # Usage:
-#   git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/.dotfiles
+#   git clone https://github.com/JLFrick/dotfiles.git ~/.dotfiles
 #   bash ~/.dotfiles/bootstrap.sh [--personal|--minimal|--work]
 #
 # Profiles:
@@ -30,7 +30,8 @@ warn()  { echo -e "  ${YELLOW}!${NC}  $1"; }
 fail()  { echo -e "  ${RED}✗${NC}  $1"; exit 1; }
 
 # ── Profile ──────────────────────────────────────────────────────────────────
-PROFILE="personal"
+PROFILE_FILE="$HOME/.dotfiles-profile"
+PROFILE="$(cat "$PROFILE_FILE" 2>/dev/null || echo "personal")"
 for arg in "$@"; do
   case $arg in
     --personal) PROFILE="personal" ;;
@@ -39,6 +40,7 @@ for arg in "$@"; do
     *) warn "Unknown flag: $arg (ignored)" ;;
   esac
 done
+echo "$PROFILE" > "$PROFILE_FILE"
 echo; echo "${BOLD}Dotfiles bootstrap — profile: ${PROFILE}${RESET}"
 echo "  Dotfiles: $DOTFILES"
 echo "  OS:       $OS"
@@ -103,9 +105,11 @@ if ! command -v brew &>/dev/null; then
   eval "$("$BREW_PREFIX/bin/brew" shellenv)"
   ok "Homebrew installed"
 else
-  skip "Homebrew ($(brew --version | head -1))"
+  skip "Homebrew ($(brew --version 2>/dev/null | awk 'NR==1{print;exit}'))"
   brew update --quiet
 fi
+
+export HOMEBREW_BUNDLE_NO_LOCK=1
 
 # Core CLI tools — installed on every profile
 step "Core tools (Brewfile)"
@@ -138,12 +142,12 @@ fi
 # 5. npm globals
 # =============================================================================
 step "npm globals"
-if command -v claude &>/dev/null; then skip "claude ($(claude --version 2>/dev/null | head -1))"
+if command -v claude &>/dev/null; then skip "claude ($(claude --version 2>/dev/null | awk 'NR==1{print;exit}'))"
 else
   npm install -g @anthropic-ai/claude-code
   ok "Claude Code installed"
 fi
-if command -v ccusage &>/dev/null; then skip "ccusage ($(ccusage --version 2>/dev/null | head -1))"
+if command -v ccusage &>/dev/null; then skip "ccusage ($(ccusage --version 2>/dev/null | awk 'NR==1{print;exit}'))"
 else
   npm install -g ccusage
   ok "ccusage installed"
@@ -153,6 +157,7 @@ fi
 # 6. Shell config
 # =============================================================================
 step "Shell"
+symlink "shell/.brew_env" ".brew_env"
 symlink "shell/.zshrc"    ".zshrc"
 symlink "shell/.zprofile" ".zprofile"
 symlink "shell/.aliases"  ".aliases"
@@ -177,6 +182,7 @@ fi
 mkdir -p "$HOME/$VSCODE_USER"
 symlink "editor/settings.json"    "$VSCODE_USER/settings.json"
 symlink "editor/keybindings.json" "$VSCODE_USER/keybindings.json"
+symlink "editor/.editorconfig"    ".editorconfig"
 
 if command -v code &>/dev/null && [ -f "$DOTFILES/editor/extensions.txt" ]; then
   while IFS= read -r ext; do
@@ -204,7 +210,7 @@ mkdir -p "$HOME/.config"
 symlink "config/starship.toml" ".config/starship.toml"
 
 step "App preferences"
-if [ "$OS" = "Darwin" ] && [ -f "$DOTFILES/config/stats.plist" ]; then
+if [ "$OS" = "Darwin" ] && [ "$PROFILE" != "minimal" ] && [ -f "$DOTFILES/config/stats.plist" ]; then
   defaults import eu.exelban.Stats "$DOTFILES/config/stats.plist"
   ok "Stats preferences applied"
 fi
@@ -225,11 +231,7 @@ step "Dev folder and scripts"
 mkdir -p "$HOME/dev/scratch"
 ok "~/dev/scratch"
 mkdir -p "$HOME/.local/bin"
-if [ -f "$DOTFILES/bin/new-project.sh" ]; then
-  cp "$DOTFILES/bin/new-project.sh" "$HOME/.local/bin/new-project"
-  chmod +x "$HOME/.local/bin/new-project"
-  ok "new-project command → ~/.local/bin/new-project"
-fi
+symlink "bin/new-project.sh" ".local/bin/new-project"
 
 # =============================================================================
 # Done
@@ -242,4 +244,6 @@ echo "  1. Restart terminal  (or: source ~/.zshrc)"
 echo "  2. Set git identity: code $DOTFILES/git/.gitconfig"
 echo "  3. GitHub auth:      gh auth login"
 echo "  4. SSH keys:         restore from password manager → ~/.ssh/"
-[ "$PROFILE" = "personal" ] && echo "  5. Set terminal font: JetBrainsMono Nerd Font (in VS Code + your terminal app)"
+if [ "$PROFILE" = "personal" ]; then
+  echo "  5. Set terminal font: JetBrainsMono Nerd Font (in VS Code + your terminal app)"
+fi

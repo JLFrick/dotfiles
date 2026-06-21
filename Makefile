@@ -25,8 +25,7 @@ update:
 	@echo "Pulling dotfiles..."
 	@git -C $(DOTFILES) pull --rebase
 	@bash $(DOTFILES)/bootstrap.sh
-	@source $(HOME)/.zshrc 2>/dev/null || true
-	@echo "Done."
+	@echo "Done. Run: source ~/.zshrc"
 
 ## save:             Commit and push all local changes to remote
 save:

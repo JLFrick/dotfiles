@@ -1,0 +1,63 @@
+name: Install
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # weekly, Monday 02:00 AM EDT
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: .dotfiles
+
+      - name: Install (minimal profile)
+        run: bash .dotfiles/bootstrap.sh --minimal
+        env:
+          DOTFILES: ${{ github.workspace }}/.dotfiles
+
+      - name: Verify symlinks
+        run: |
+          test -L "$HOME/.zshrc"     || (echo "missing ~/.zshrc symlink"     && exit 1)
+          test -L "$HOME/.gitconfig" || (echo "missing ~/.gitconfig symlink" && exit 1)
+          test -L "$HOME/.aliases"   || (echo "missing ~/.aliases symlink"   && exit 1)
+          echo "All symlinks present"
+
+      - name: Verify tools
+        run: |
+          source "$HOME/.brew_env"
+          brew --version
+          git --version
+          starship --version
+
+  test-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: .dotfiles
+
+      - name: Install (minimal profile)
+        run: bash .dotfiles/bootstrap.sh --minimal
+        env:
+          DOTFILES: ${{ github.workspace }}/.dotfiles
+
+      - name: Verify symlinks
+        run: |
+          test -L "$HOME/.zshrc"     || (echo "missing ~/.zshrc symlink"     && exit 1)
+          test -L "$HOME/.gitconfig" || (echo "missing ~/.gitconfig symlink" && exit 1)
+          test -L "$HOME/.aliases"   || (echo "missing ~/.aliases symlink"   && exit 1)
+          echo "All symlinks present"
+
+      - name: Verify tools
+        run: |
+          source "$HOME/.brew_env"
+          brew --version
+          git --version
+          starship --version

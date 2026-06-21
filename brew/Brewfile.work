@@ -1,22 +1,8 @@
 # =============================================================================
-# Brewfile.work — work-specific tools
-# Applied ONLY with --work profile.
-# Add any tools required by your work environment here.
+# Brewfile.work — reserved for a dedicated work machine
+# Applied ONLY with --work profile (bash bootstrap.sh --work).
 #
-# Keep this file minimal. Most tools belong in Brewfile (core).
-# Work-specific apps that can't be installed via Homebrew go in
-# ~/.zshrc.local on the work machine instead.
+# Currently empty — work apps live in Brewfile.personal since they're used
+# on the personal Mac. Add machine-specific tools here if a separate work
+# machine is ever set up.
 # =============================================================================
-
-# ── Communication ─────────────────────────────────────────────────────────────
-cask "microsoft-teams"    # work messaging and video calls
-cask "webex"              # Cisco video conferencing
-
-# ── Docs ──────────────────────────────────────────────────────────────────────
-cask "microsoft-word"     # Word processor
-cask "microsoft-excel"    # Spreadsheets
-# cask "microsoft-office" # full suite (Word, Excel, PowerPoint, Outlook)
-
-# ── Remote access ─────────────────────────────────────────────────────────────
-cask "teamviewer"         # remote desktop support
-cask "citrix-workspace"   # VDI client
