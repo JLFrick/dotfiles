@@ -40,9 +40,16 @@
 
 [merge]
     conflictstyle  = zdiff3             # cleaner 3-way conflict markers
+    ff             = only               # prevent accidental merge commits; use rebase instead
 
 [rebase]
     autoSquash     = true               # auto-apply fixup! and squash! commits
+
+[rerere]
+    enabled        = true               # remember and reuse conflict resolutions
+
+[commit]
+    verbose        = true               # show diff in editor when writing commit message
 
 [diff]
     colorMoved     = default
