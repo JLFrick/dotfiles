@@ -1,0 +1,74 @@
+# =============================================================================
+# ~/.gitignore_global → symlink from ~/.dotfiles/git/.gitignore_global
+#
+# Patterns ignored across EVERY repository on this machine.
+# Add patterns here to avoid repeating them in every project .gitignore.
+# =============================================================================
+
+# ── macOS ────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ── Linux ────────────────────────────────────────────────────────────────────
+*~
+.nfs*
+
+# ── Editors ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.history/
+*.orig
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.python-version
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.pyo
+
+# ── Jupyter ──────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Secrets — NEVER COMMIT ───────────────────────────────────────────────────
+.env
+.env.*
+!.env.example      # .env.example is fine — it's a template, not real secrets
+secrets.toml
+*.pem
+*.key
+*.p12
+.netrc
+*.token
+*.secret
+
+# ── Data files ───────────────────────────────────────────────────────────────
+*.parquet
+*.arrow
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.csv.gz
+*.csv.zip
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Node ─────────────────────────────────────────────────────────────────────
+node_modules/
+.npm/

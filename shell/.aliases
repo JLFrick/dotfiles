@@ -1,0 +1,70 @@
+# =============================================================================
+# ~/.aliases → symlink from ~/.dotfiles/shell/.aliases
+#
+# All shortcuts in one place. Sourced by .zshrc.
+# Uses `command -v` checks so aliases degrade gracefully if a tool
+# is not installed (e.g. on a fresh machine or a minimal profile).
+# =============================================================================
+
+# ── Navigation ───────────────────────────────────────────────────────────────
+alias dev="cd \$DEV"
+alias scratch="cd \$DEV/scratch"
+alias dotfiles="code ~/.dotfiles"        # open repo in VS Code
+alias ..="cd .."
+alias ...="cd ../.."
+
+# ── Better defaults (degrade gracefully if tools not installed) ───────────────
+command -v eza &>/dev/null && {
+  alias ls="eza --icons --group-directories-first"
+  alias ll="eza -la --icons --git --group-directories-first"
+  alias lt="eza --tree --level=2 --icons"
+}
+command -v bat  &>/dev/null && alias cat="bat"
+command -v rg   &>/dev/null && alias grep="rg"
+command -v fd   &>/dev/null && alias find="fd"
+
+# ── Git ──────────────────────────────────────────────────────────────────────
+alias g="git"
+alias gs="git status -sb"
+alias ga="git add -A"
+alias gc="git commit -m"
+alias gac="git add -A && git commit -m"
+alias gp="git push"
+alias gl="git log --oneline -15"
+alias gd="git diff"
+alias gwip="git add -A && git commit -m 'wip'"
+alias gundo="git reset HEAD~1 --mixed"
+
+# ── Dotfiles management ──────────────────────────────────────────────────────
+alias dotfiles-save="make -C ~/.dotfiles save"
+alias dotfiles-update="make -C ~/.dotfiles update"
+alias dotfiles-list="make -C ~/.dotfiles list"
+alias reload="source ~/.zshrc && echo 'Shell reloaded.'"
+
+# ── uv (Python) ──────────────────────────────────────────────────────────────
+alias uvs="uv sync"
+alias uva="uv add"
+alias uvad="uv add --dev"
+alias uvr="uv run"
+alias uvt="uv run pytest"
+alias uvl="uv run ruff check ."
+alias uvf="uv run ruff format ."
+alias py="uv run python"
+
+# ── Docker ───────────────────────────────────────────────────────────────────
+alias dc="docker compose"
+alias dcu="docker compose up"
+alias dcd="docker compose down"
+alias dcp="docker compose ps"
+alias dcl="docker compose logs -f"
+
+# ── Claude Code usage ────────────────────────────────────────────────────────
+alias ccu='ccusage'
+alias ccud='ccusage daily'
+alias ccum='ccusage monthly'
+
+# ── Utilities ────────────────────────────────────────────────────────────────
+alias path='echo $PATH | tr ":" "\n"'
+alias ports="lsof -i -P -n | grep LISTEN"
+alias cleanup="find . -name '.DS_Store' -delete"
+alias ip="curl -s ifconfig.me && echo"

@@ -1,0 +1,36 @@
+format = """
+$directory$git_branch$git_status$python$cmd_duration
+$character"""
+
+[directory]
+truncation_length = 3
+truncate_to_repo  = true
+style             = "bold cyan"
+
+[git_branch]
+symbol = " "
+style  = "bold yellow"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+style     = "red"
+format    = '([$all_status$ahead_behind]($style) )'
+ahead     = "⇡${count}"
+behind    = "⇣${count}"
+modified  = "!${count}"
+untracked = "?${count}"
+staged    = "+${count}"
+
+[python]
+symbol       = " "
+style        = "bold blue"
+format       = '[$symbol$version(\($virtualenv\))]($style) '
+detect_files = ["pyproject.toml", ".python-version", "requirements.txt"]
+
+[cmd_duration]
+min_time = 2_000
+format   = "[$duration](bold dimmed) "
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol   = "[❯](bold red)"

@@ -1,0 +1,34 @@
+# =============================================================================
+# Brewfile — core CLI tools
+# Installed on EVERY machine regardless of profile (personal, minimal, work).
+# Works on macOS and Linux. Cask entries are silently skipped on Linux.
+#
+# Apply: brew bundle --file=~/.dotfiles/brew/Brewfile
+# Add tools here — never `brew install` directly for tools you want to keep.
+# =============================================================================
+
+# ── Version control ──────────────────────────────────────────────────────────
+brew "git"
+brew "git-lfs"
+brew "gh"             # GitHub CLI — gh auth login, gh repo create, gh pr
+
+# ── Shell and terminal ────────────────────────────────────────────────────────
+brew "starship"       # fast, informative prompt (git, Python, timing)
+brew "zoxide"         # smarter cd: learns your most-used directories
+brew "fzf"            # fuzzy finder: Ctrl+R history, Ctrl+T file search
+brew "direnv"         # auto-load .envrc files per project directory
+
+# ── Better Unix defaults ─────────────────────────────────────────────────────
+brew "ripgrep"        # rg  — fast grep that respects .gitignore
+brew "fd"             # fd  — fast, clean alternative to find
+brew "bat"            # bat — cat with syntax highlighting and line numbers
+brew "eza"            # eza — ls with git status, icons, tree view
+brew "git-delta"      # delta — readable, side-by-side git diffs
+
+# ── Data + scripting ─────────────────────────────────────────────────────────
+brew "jq"             # JSON in terminal: cat file.json | jq '.key'
+brew "yq"             # YAML in terminal: same syntax as jq
+brew "wget"
+
+# ── Runtime (required by tools below) ────────────────────────────────────────
+brew "node"           # required for Claude Code (npm install -g)

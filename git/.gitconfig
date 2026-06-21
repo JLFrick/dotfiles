@@ -1,0 +1,78 @@
+# =============================================================================
+# ~/.gitconfig → symlink from ~/.dotfiles/git/.gitconfig
+#
+# Global git configuration applied to every repository on this machine.
+# Update [user] section with your name and email before committing.
+# The osxkeychain credential helper is silently ignored on Linux.
+# =============================================================================
+
+[user]
+    name       = Jan-Luca Frick
+    email      = JanLucaFrick@gmail.com
+
+[core]
+    excludesfile   = ~/.gitignore_global
+    editor         = code --wait
+    pager          = delta
+    autocrlf       = input              # LF on checkout, no conversion on commit
+    whitespace     = fix                # fix trailing whitespace on apply
+
+[interactive]
+    diffFilter     = delta --color-only
+
+[delta]
+    navigate       = true               # n/N to jump between diff sections
+    side-by-side   = true
+    line-numbers   = true
+    syntax-theme   = Monokai Extended
+
+[init]
+    defaultBranch  = main
+
+[pull]
+    rebase         = false              # merge, not rebase on pull
+
+[push]
+    autoSetupRemote = true              # replaces: git push -u origin main
+
+[fetch]
+    prune          = true               # auto-remove deleted remote branches
+
+[merge]
+    conflictstyle  = zdiff3             # cleaner 3-way conflict markers
+
+[rebase]
+    autoSquash     = true               # auto-apply fixup! and squash! commits
+
+[diff]
+    colorMoved     = default
+
+[status]
+    showUntrackedFiles = all            # show untracked files individually
+
+[branch]
+    sort           = -committerdate     # most recently used branches first
+
+[credential]
+    helper         = osxkeychain        # macOS Keychain (ignored on Linux)
+
+[alias]
+    # Status and log
+    st            = status -sb
+    lg            = log --oneline --graph --decorate -20
+    lga           = log --oneline --graph --decorate --all
+
+    # Common operations
+    undo          = reset HEAD~1 --mixed    # undo last commit, keep changes staged
+    wip           = !git add -A && git commit -m 'wip'
+    unwip         = !git log -n 1 | grep -q 'wip' && git reset HEAD~1
+
+    # Branches
+    branches      = branch -a --sort=-committerdate
+    gone          = !git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}'
+    cleanup       = !git branch --merged main | grep -v main | xargs git branch -d
+
+    # Useful views
+    files         = diff --name-only
+    last          = log -1 HEAD --stat
+    who           = shortlog -n -s --no-merges

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Battery_battery_additional</key>
+    <string>percentage</string>
+    <key>Battery_battery_color</key>
+    <true/>
+    <key>Battery_battery_xlSize</key>
+    <false/>
+    <key>Battery_notifications_high</key>
+    <string></string>
+    <key>Battery_notifications_low</key>
+    <string>low</string>
+    <key>Battery_position</key>
+    <integer>6</integer>
+    <key>Battery_state</key>
+    <true/>
+    <key>Bluetooth_position</key>
+    <integer>7</integer>
+    <key>Bluetooth_state</key>
+    <false/>
+    <key>CPU_position</key>
+    <integer>0</integer>
+    <key>Clock_position</key>
+    <integer>8</integer>
+    <key>Clock_state</key>
+    <false/>
+    <key>CombinedModules</key>
+    <true/>
+    <key>CombinedModules_separator</key>
+    <false/>
+    <key>Disk_position</key>
+    <integer>3</integer>
+    <key>GPU_position</key>
+    <integer>1</integer>
+    <key>GPU_state</key>
+    <true/>
+    <key>Network_position</key>
+    <integer>5</integer>
+    <key>RAM_position</key>
+    <integer>2</integer>
+    <key>Sensors_position</key>
+    <integer>4</integer>
+    <key>Sensors_state</key>
+    <false/>
+    <key>keep_menubar_positions</key>
+    <false/>
+    <key>telemetry</key>
+    <false/>
+</dict>
+</plist>

@@ -1,0 +1,41 @@
+# =============================================================================
+# Brewfile.personal — GUI apps and fonts
+# Applied ONLY on personal Macs with --personal profile (default).
+# macOS only — cask entries are ignored on Linux.
+#
+# Why fonts?
+#   Starship prompt, eza, and VS Code material icons all use special glyphs
+#   (git branch symbols, Python icons, file type icons). Without a Nerd Font
+#   installed and set in your terminal, these show as broken boxes or '?'.
+#   JetBrainsMono Nerd Font is both an excellent coding font AND has all glyphs.
+#
+#   After installing: set your terminal font to "JetBrainsMono Nerd Font"
+#   in VS Code terminal settings (already in editor/settings.json).
+#
+# Apply: brew bundle install --file=~/.dotfiles/brew/Brewfile.personal
+# =============================================================================
+
+# ── Editors ──────────────────────────────────────────────────────────────────
+cask "visual-studio-code"
+cask "cursor"             # AI-first code editor (fork of VS Code)
+
+# ── Productivity ─────────────────────────────────────────────────────────────
+cask "rectangle"          # window management
+cask "stats"              # system stats in menu bar (CPU, RAM, network)
+cask "cryptomator"        # client-side encryption for cloud storage
+cask "google-drive"       # Google Drive desktop client
+cask "obsidian"           # note-taking and knowledge base
+cask "pdf-expert"         # PDF viewer and editor
+
+# ── Communication ─────────────────────────────────────────────────────────────
+cask "zoom"               # video conferencing
+cask "whatsapp"           # messaging
+
+# ── Media ─────────────────────────────────────────────────────────────────────
+cask "spotify"            # music streaming
+
+# ── AI ────────────────────────────────────────────────────────────────────────
+cask "claude"             # Anthropic Claude desktop app
+
+# ── Fonts ─────────────────────────────────────────────────────────────────────
+cask "font-jetbrains-mono-nerd-font"

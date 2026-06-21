@@ -1,0 +1,41 @@
+# =============================================================================
+# VS Code extensions
+# Applied during bootstrap when `code` is available.
+#
+# Add/remove extensions here, then run:
+#   make install   (full bootstrap)
+#   or manually: code --install-extension <id>
+# =============================================================================
+
+# ── Python ────────────────────────────────────────────────────────────────────
+ms-python.python
+ms-python.vscode-pylance
+ms-python.debugpy
+ms-python.vscode-python-envs
+
+# ── Linting & Formatting ──────────────────────────────────────────────────────
+charliermarsh.ruff
+tamasfe.even-better-toml
+
+# ── Notebooks & Data ──────────────────────────────────────────────────────────
+ms-toolsai.jupyter
+ms-toolsai.jupyter-keymap
+ms-toolsai.jupyter-renderers
+ms-toolsai.vscode-jupyter-cell-tags
+ms-toolsai.vscode-jupyter-slideshow
+ms-toolsai.datawrangler
+
+# ── Containers & Remote ───────────────────────────────────────────────────────
+ms-azuretools.vscode-docker
+ms-azuretools.vscode-containers
+ms-vscode-remote.remote-containers
+
+# ── Git & GitHub ──────────────────────────────────────────────────────────────
+github.vscode-pull-request-github
+
+# ── AI ────────────────────────────────────────────────────────────────────────
+anthropic.claude-code
+
+# ── Editor & UI ───────────────────────────────────────────────────────────────
+pkief.material-icon-theme
+usernamehw.errorlens

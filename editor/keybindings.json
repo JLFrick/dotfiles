@@ -1,0 +1,6 @@
+[
+  { "key": "cmd+`",       "command": "workbench.action.terminal.toggleTerminal" },
+  { "key": "cmd+shift+`", "command": "workbench.action.terminal.new" },
+  { "key": "alt+up",      "command": "editor.action.moveLinesUpAction",   "when": "editorTextFocus" },
+  { "key": "alt+down",    "command": "editor.action.moveLinesDownAction", "when": "editorTextFocus" }
+]

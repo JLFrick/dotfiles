@@ -1,0 +1,78 @@
+{
+  // ── Font ──────────────────────────────────────────────────────────────────
+  // JetBrainsMono Nerd Font required for terminal icons (install via Brewfile.personal)
+  "editor.fontFamily": "JetBrainsMono Nerd Font, Menlo, monospace",
+  "editor.fontSize": 13,
+  "editor.lineHeight": 1.6,
+  "editor.fontLigatures": true,
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontSize": 13,
+
+  // ── Editor behaviour ──────────────────────────────────────────────────────
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [100],
+  "editor.wordWrap": "off",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.stickyScroll.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.renderWhitespace": "boundary",
+
+  // ── Python ────────────────────────────────────────────────────────────────
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    }
+  },
+  "python.terminal.activateEnvironment": true,
+
+  // ── Terminal ──────────────────────────────────────────────────────────────
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+
+  // ── Files ─────────────────────────────────────────────────────────────────
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.autoSave": "onFocusChange",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.ruff_cache": true,
+    "**/.mypy_cache": true
+  },
+
+  // ── Git ───────────────────────────────────────────────────────────────────
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.suggestSmartCommit": false,
+  "git.enableSmartCommit": false,
+
+  // ── Jupyter ───────────────────────────────────────────────────────────────
+  "jupyter.askForKernelRestart": false,
+
+  // ── Workbench ─────────────────────────────────────────────────────────────
+  "workbench.colorTheme": "Dark 2026",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": false,
+
+  // ── Explorer ──────────────────────────────────────────────────────────────
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "workbench.tree.indent": 16,
+
+  // ── Claude Code ───────────────────────────────────────────────────────────
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.useTerminal": true,
+
+  // ── Security ──────────────────────────────────────────────────────────────
+  "security.workspace.trust.untrustedFiles": "open",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:oswe-vscode-modelD"
+}
