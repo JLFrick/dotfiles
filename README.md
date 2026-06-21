@@ -4,7 +4,13 @@ Personal development environment for macOS and Linux. One command from a
 fresh machine to a fully configured setup.
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/.dotfiles
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/JLFrick/dotfiles/main/remote-install.sh)"
+```
+
+Or if you already have git:
+
+```bash
+git clone https://github.com/JLFrick/dotfiles.git ~/.dotfiles
 bash ~/.dotfiles/bootstrap.sh
 ```
 
@@ -30,6 +36,7 @@ bash ~/.dotfiles/bootstrap.sh
 ├── shell/
 │   ├── .zshrc              Interactive shell: tools, prompt, history, aliases.
 │   ├── .zprofile           Login shell: PATH and env vars (runs once at login).
+│   ├── .brew_env           Homebrew path detection — shared by .zshrc and .zprofile.
 │   └── .aliases            All shortcuts in one file.
 │
 ├── git/
@@ -37,8 +44,9 @@ bash ~/.dotfiles/bootstrap.sh
 │   └── .gitignore_global   Patterns ignored in every repo on this machine.
 │
 ├── editor/
-│   ├── settings.json       VS Code + Cursor shared settings.
-│   └── keybindings.json    Custom shortcuts.
+│   ├── settings.json       VS Code settings.
+│   ├── keybindings.json    Custom shortcuts.
+│   └── .editorconfig       Cross-editor indentation and whitespace rules.
 │
 ├── ai/
 │   ├── claude/
@@ -167,19 +175,21 @@ If the font is not set, your prompt will show broken boxes instead of icons.
 ## New machine setup
 
 ```bash
-# 1. Get git — on macOS this triggers the Xcode CLI tools installer
-git --version
+# Option A — no git required (uses curl/wget fallback)
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/JLFrick/dotfiles/main/remote-install.sh)"
+# pass a profile flag:
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/JLFrick/dotfiles/main/remote-install.sh)" -- --minimal
 
-# 2. Clone dotfiles and run bootstrap (installs Homebrew, all tools, symlinks)
-git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/.dotfiles
+# Option B — manual clone
+git clone https://github.com/JLFrick/dotfiles.git ~/.dotfiles
 bash ~/.dotfiles/bootstrap.sh          # personal Mac (default)
 bash ~/.dotfiles/bootstrap.sh --minimal  # work or server
 
-# 3. After restart
-#    a. Update email:  code ~/.dotfiles/git/.gitconfig
-#    b. GitHub auth:   gh auth login
-#    c. SSH keys:      restore from password manager → ~/.ssh/
-#    d. Terminal font: set "JetBrainsMono Nerd Font" in VS Code settings
+# After restart:
+#   a. Update email:  code ~/.dotfiles/git/.gitconfig
+#   b. GitHub auth:   gh auth login
+#   c. SSH keys:      restore from password manager → ~/.ssh/
+#   d. Terminal font: set "JetBrainsMono Nerd Font" in VS Code settings
 ```
 
 ---
