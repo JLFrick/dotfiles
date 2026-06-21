@@ -3,7 +3,7 @@
 # bootstrap.sh — dotfiles installer
 #
 # Usage:
-#   git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/.dotfiles
+#   git clone https://github.com/JLFrick/dotfiles.git ~/.dotfiles
 #   bash ~/.dotfiles/bootstrap.sh [--personal|--minimal|--work]
 #
 # Profiles:
@@ -30,7 +30,8 @@ warn()  { echo -e "  ${YELLOW}!${NC}  $1"; }
 fail()  { echo -e "  ${RED}✗${NC}  $1"; exit 1; }
 
 # ── Profile ──────────────────────────────────────────────────────────────────
-PROFILE="personal"
+PROFILE_FILE="$HOME/.dotfiles-profile"
+PROFILE="$(cat "$PROFILE_FILE" 2>/dev/null || echo "personal")"
 for arg in "$@"; do
   case $arg in
     --personal) PROFILE="personal" ;;
@@ -39,6 +40,7 @@ for arg in "$@"; do
     *) warn "Unknown flag: $arg (ignored)" ;;
   esac
 done
+echo "$PROFILE" > "$PROFILE_FILE"
 echo; echo "${BOLD}Dotfiles bootstrap — profile: ${PROFILE}${RESET}"
 echo "  Dotfiles: $DOTFILES"
 echo "  OS:       $OS"
@@ -107,6 +109,8 @@ else
   brew update --quiet
 fi
 
+export HOMEBREW_BUNDLE_NO_LOCK=1
+
 # Core CLI tools — installed on every profile
 step "Core tools (Brewfile)"
 brew bundle install --file="$DOTFILES/brew/Brewfile" && ok "Core Brewfile applied"
@@ -153,6 +157,7 @@ fi
 # 6. Shell config
 # =============================================================================
 step "Shell"
+symlink "shell/.brew_env" ".brew_env"
 symlink "shell/.zshrc"    ".zshrc"
 symlink "shell/.zprofile" ".zprofile"
 symlink "shell/.aliases"  ".aliases"
@@ -177,6 +182,7 @@ fi
 mkdir -p "$HOME/$VSCODE_USER"
 symlink "editor/settings.json"    "$VSCODE_USER/settings.json"
 symlink "editor/keybindings.json" "$VSCODE_USER/keybindings.json"
+symlink "editor/.editorconfig"    ".editorconfig"
 
 if command -v code &>/dev/null && [ -f "$DOTFILES/editor/extensions.txt" ]; then
   while IFS= read -r ext; do
@@ -225,11 +231,7 @@ step "Dev folder and scripts"
 mkdir -p "$HOME/dev/scratch"
 ok "~/dev/scratch"
 mkdir -p "$HOME/.local/bin"
-if [ -f "$DOTFILES/bin/new-project.sh" ]; then
-  cp "$DOTFILES/bin/new-project.sh" "$HOME/.local/bin/new-project"
-  chmod +x "$HOME/.local/bin/new-project"
-  ok "new-project command → ~/.local/bin/new-project"
-fi
+symlink "bin/new-project.sh" ".local/bin/new-project"
 
 # =============================================================================
 # Done

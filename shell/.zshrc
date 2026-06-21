@@ -8,10 +8,7 @@
 
 # ── Homebrew ─────────────────────────────────────────────────────────────────
 # Also in .zprofile — VS Code / terminal emulators open non-login shells that skip .zprofile
-if   [ -f "/opt/homebrew/bin/brew" ];              then eval "$(/opt/homebrew/bin/brew shellenv)"   # macOS ARM
-elif [ -f "/usr/local/bin/brew" ];                 then eval "$(/usr/local/bin/brew shellenv)"       # macOS Intel
-elif [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" # Linux
-fi
+[ -f "$HOME/.brew_env" ] && source "$HOME/.brew_env"
 
 # ── uv (Python manager) ──────────────────────────────────────────────────────
 export PATH="$HOME/.local/bin:$PATH"
