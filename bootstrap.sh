@@ -105,7 +105,7 @@ if ! command -v brew &>/dev/null; then
   eval "$("$BREW_PREFIX/bin/brew" shellenv)"
   ok "Homebrew installed"
 else
-  skip "Homebrew ($(brew --version | head -1))"
+  skip "Homebrew ($(brew --version 2>/dev/null | awk 'NR==1{print;exit}'))"
   brew update --quiet
 fi
 
@@ -142,12 +142,12 @@ fi
 # 5. npm globals
 # =============================================================================
 step "npm globals"
-if command -v claude &>/dev/null; then skip "claude ($(claude --version 2>/dev/null | head -1))"
+if command -v claude &>/dev/null; then skip "claude ($(claude --version 2>/dev/null | awk 'NR==1{print;exit}'))"
 else
   npm install -g @anthropic-ai/claude-code
   ok "Claude Code installed"
 fi
-if command -v ccusage &>/dev/null; then skip "ccusage ($(ccusage --version 2>/dev/null | head -1))"
+if command -v ccusage &>/dev/null; then skip "ccusage ($(ccusage --version 2>/dev/null | awk 'NR==1{print;exit}'))"
 else
   npm install -g ccusage
   ok "ccusage installed"
@@ -210,7 +210,7 @@ mkdir -p "$HOME/.config"
 symlink "config/starship.toml" ".config/starship.toml"
 
 step "App preferences"
-if [ "$OS" = "Darwin" ] && [ -f "$DOTFILES/config/stats.plist" ]; then
+if [ "$OS" = "Darwin" ] && [ "$PROFILE" != "minimal" ] && [ -f "$DOTFILES/config/stats.plist" ]; then
   defaults import eu.exelban.Stats "$DOTFILES/config/stats.plist"
   ok "Stats preferences applied"
 fi
@@ -244,4 +244,6 @@ echo "  1. Restart terminal  (or: source ~/.zshrc)"
 echo "  2. Set git identity: code $DOTFILES/git/.gitconfig"
 echo "  3. GitHub auth:      gh auth login"
 echo "  4. SSH keys:         restore from password manager → ~/.ssh/"
-[ "$PROFILE" = "personal" ] && echo "  5. Set terminal font: JetBrainsMono Nerd Font (in VS Code + your terminal app)"
+if [ "$PROFILE" = "personal" ]; then
+  echo "  5. Set terminal font: JetBrainsMono Nerd Font (in VS Code + your terminal app)"
+fi
