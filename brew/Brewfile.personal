@@ -17,7 +17,6 @@
 
 # ── Editors ──────────────────────────────────────────────────────────────────
 cask "visual-studio-code"
-cask "cursor"             # AI-first code editor (fork of VS Code)
 
 # ── Productivity ─────────────────────────────────────────────────────────────
 cask "rectangle"          # window management
@@ -36,6 +35,14 @@ cask "spotify"            # music streaming
 
 # ── AI ────────────────────────────────────────────────────────────────────────
 cask "claude"             # Anthropic Claude desktop app
+
+# ── Work & Comms ──────────────────────────────────────────────────────────────
+cask "microsoft-teams"    # messaging and video calls
+cask "webex"              # Cisco video conferencing
+cask "microsoft-word"     # word processor
+cask "microsoft-excel"    # spreadsheets
+cask "teamviewer"         # remote desktop
+cask "citrix-workspace"   # VDI client
 
 # ── Fonts ─────────────────────────────────────────────────────────────────────
 cask "font-jetbrains-mono-nerd-font"

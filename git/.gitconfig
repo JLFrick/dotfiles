@@ -30,7 +30,7 @@
     defaultBranch  = main
 
 [pull]
-    rebase         = false              # merge, not rebase on pull
+    rebase         = true               # rebase local commits on top of remote (linear history)
 
 [push]
     autoSetupRemote = true              # replaces: git push -u origin main

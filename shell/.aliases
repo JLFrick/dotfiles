@@ -32,6 +32,8 @@ alias gac="git add -A && git commit -m"
 alias gp="git push"
 alias gl="git log --oneline -15"
 alias gd="git diff"
+alias gcb="git checkout -b"
+alias gco="git checkout"
 alias gwip="git add -A && git commit -m 'wip'"
 alias gundo="git reset HEAD~1 --mixed"
 
