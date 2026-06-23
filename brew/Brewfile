@@ -32,3 +32,4 @@ brew "wget"
 
 # ── Runtime (required by tools below) ────────────────────────────────────────
 brew "node"           # required for Claude Code (npm install -g)
+brew "rust"           # required for Tauri and native compilation
