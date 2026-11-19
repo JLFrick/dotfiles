@@ -67,3 +67,4 @@ autoload -Uz compinit && compinit
 #   source /opt/work-tools/env.sh
 #   alias vpn="openconnect vpn.company.com"
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
+export BASIC_MEMORY_NO_PROMOS=1
