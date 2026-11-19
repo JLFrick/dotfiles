@@ -72,3 +72,5 @@ logs/
 # ── Node ─────────────────────────────────────────────────────────────────────
 node_modules/
 .npm/
+
+**/.claude/settings.local.json
