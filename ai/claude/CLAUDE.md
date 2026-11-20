@@ -65,7 +65,7 @@ Write it down before you build it. Update it when you change it.
 
 ## Git Safety
 
-- **NEVER** commit without explicit approval. One exception: in a project whose `.kit.toml` sets `git.commit = "branch"`, agents may commit on their own non-main branches (e.g. `claude/*` in a worktree) without asking. Never commit on main; merging and pushing always need approval.
+- **NEVER** commit without explicit approval. One exception: in a project whose `.ratchet.toml` sets `git.commit = "branch"`, agents may commit on their own non-main branches (e.g. `claude/*` in a worktree) without asking. Never commit on main; merging and pushing always need approval.
 - Before any `git commit` outside that exception, or any `git push`: state what changed and wait for confirmation.
 - Never amend published commits, force-push, or reset without explicit instruction.
 
